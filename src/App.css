@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +41,48 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.badge {
+  right: -4px;
+  top: -4px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #D85050;
+  position: absolute;
+}
+
+.badge-dot {
+  min-width: 8px;
+  min-height: 8px;
+  font-size: 13px;
+  color: #FFFFFF;
+}
+
+.badge-count {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  top: -8px;
+  right: -8px;
+  justify-content: center;
+}
+
+.gradient-bg {
+  padding: 3px;
+  border-style: solid;
+  background: linear-gradient(180deg, #CC00FF,#3300FF) 30% round;
+}
+
+.float-button-badge {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  border: 3px solid #FFFFFF;
+  height: 21px;
+  width: 21px;
+  border-radius: 50%;
+  background: #D85050;
+  position: absolute;
 }
