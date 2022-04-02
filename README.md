@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Deployment
-- The application is deployed to [GitHub Pages]()
+- The application is deployed to [GitHub Pages](https://saurabhrajpurohit.github.io/exercism-frontend)
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/en/) : v14.17.1
