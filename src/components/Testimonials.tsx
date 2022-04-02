@@ -1,21 +1,21 @@
-import testimonials from '../images/testimonials.svg';
-import zigzag from '../images/zigzag.svg';
+import testimonials from '../icons/testimonials.svg';
+import { ReactComponent as Zigzag } from '../icons/zigzag.svg';
 
 export default ({ totalTestimonials = 0 }: { totalTestimonials: number }) => {
     return (
-        <div className="">
-            <div>
-                <img src={testimonials} className="" />
-                <div className="text-center flex align-center">
-                    <h1 className="text-3xl font-bold">
-                        Testimonials I’ve left
-                    </h1>
-                    <p className="text-xl">
+        <div className="flex flex-col items-center w-full">
+            <img height="55px" width="62px" src={testimonials} className="" />
+            <div className="text-center flex align-center mt-3">
+                <h1 className="text-3xl font-bold">
+                    Testimonials I’ve left
+                </h1>
+                <div className="ml-5 px-3 border-2 rounded-full items-center flex">
+                    <p className="text-sm text-[#5C5589]">
                         {totalTestimonials}
                     </p>
                 </div>
-                <img src={zigzag} className="" />
             </div>
+            <Zigzag />
         </div>
     )
 }
