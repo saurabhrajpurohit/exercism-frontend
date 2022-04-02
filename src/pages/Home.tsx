@@ -23,20 +23,21 @@ const Home = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [options, setOptions] = useState({});
 
     useEffect(() => {
         getTracks();
     }, []);
 
     useEffect(() => {
-        if (page > 1 || selectedTrack || sort || (!filter || filter)) {
-            getNextPage();
+        if (Object.keys(options).length) {
+            getNextPage(options);
         }
-    }, [page, selectedTrack, sort, filter]);
+    }, [options])
 
-    const getNextPage = () => {
+    const getNextPage = (options: any) => {
         setLoading(true);
-        Service.getTestimonials(selectedTrack?.slug, sort, page, filter).then(res => {
+        Service.getTestimonials(options.selectedTrack?.slug, options.sort, options.page, options.filter).then(res => {
             setLoading(false);
             setTotalTestimonials(res.testimonials.pagination.total_count);
             setTestimonials(res.testimonials.results);
@@ -54,12 +55,14 @@ const Home = () => {
             Service.getTestimonials(selectedTrack?.slug, sort, page, filter).then((res) => {
                 const UserTestimonials = res.testimonials.track_counts;
                 let totalTracks = Object.values(UserTestimonials).reduce((a: any, b) => a + b, 0);
-                setUserTracks([{
+                let trackAll = {
                     slug: "",
                     title: "All",
                     icon_url: Language,
                     count: totalTracks as number
-                }, ...Object.keys(UserTestimonials).map((track: string) => {
+                };
+                setSelectedTrack(trackAll);
+                setUserTracks([trackAll, ...Object.keys(UserTestimonials).map((track: string) => {
                     return {
                         ...tracks[track],
                         count: UserTestimonials[track],
@@ -74,10 +77,14 @@ const Home = () => {
     };
 
     const onFilter = (value: string) => {
-        console.log(value);
         debounce(() => {
             setFilter(value);
             setPage(1);
+            setOptions(prevValue => ({
+                ...prevValue,
+                filter: value,
+                page: 1
+            }));
         }, 500);
     };
 
@@ -85,6 +92,27 @@ const Home = () => {
         setFilter("");
         setSelectedTrack(track);
         setPage(1);
+        setOptions(prevValue => ({
+            ...prevValue,
+            selectedTrack: track,
+            page: 1
+        }));
+    };
+
+    const onPageChange = (page: number) => {
+        setPage(page);
+        setOptions(prevValue => ({
+            ...prevValue,
+            page: page
+        }));
+    };
+
+    const onSortChange = (sort: string) => {
+        setSort(sort);
+        setOptions(prevValue => ({
+            ...prevValue,
+            sort: sort
+        }));
     };
 
     return (
@@ -103,14 +131,14 @@ const Home = () => {
                                 <Input icon={<Search />} label="Filter by exercise title" placeholder="Filter by exercise title" onChange={(event) => onFilter(event.target.value)} />
                             </div>
                             <div className="float-right h-full">
-                                <SortDropDown selected={sort} onSelect={(option) => setSort(option)} />
+                                <SortDropDown selected={sort} onSelect={(option) => onSortChange(option)} />
                             </div>
                         </div>
                         <div className="w-full">
                             <TracksTable testimonials={testimonials} loading={loading} />
                         </div>
                         <div>
-                            <Pagination currentPage={page} totalPages={totalPages} onPageChange={(page) => setPage(page)} />
+                            <Pagination currentPage={page} totalPages={totalPages} onPageChange={(page) => onPageChange(page)} />
                         </div>
                     </div>
                 </div>

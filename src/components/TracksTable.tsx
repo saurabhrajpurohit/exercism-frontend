@@ -19,9 +19,11 @@ export default ({ testimonials, loading }: TracksTableProps) => {
             ) : (
                 testimonials.length ? testimonials.map((testimonial, index) => {
                     return (
-                        <div key={testimonial.id} className="border-b hover:bg-[#F4F7FD]">
-                            <TestimonialRow testimonial={testimonial} />
-                        </div>
+                        <a key={testimonial.id} href="">
+                            <div key={testimonial.id} className="border-b hover:bg-[#F4F7FD]">
+                                <TestimonialRow testimonial={testimonial} />
+                            </div>
+                        </a>
                     )
                 }) : (
                     <div className="h-full flex justify-center items-center">
