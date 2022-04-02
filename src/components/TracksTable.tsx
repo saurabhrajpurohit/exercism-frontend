@@ -19,7 +19,7 @@ export default ({ testimonials, loading }: TracksTableProps) => {
             ) : (
                 testimonials.length ? testimonials.map((testimonial, index) => {
                     return (
-                        <a key={testimonial.id} href="">
+                        <a key={testimonial.id} href="#">
                             <div key={testimonial.id} className="border-b hover:bg-[#F4F7FD]">
                                 <TestimonialRow testimonial={testimonial} />
                             </div>
